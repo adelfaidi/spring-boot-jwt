@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 export class User {
@@ -20,26 +20,25 @@ export class AuthenticationService {
   }
 
   authenticate(username, password) {
-    return this.httpClient.post<any>('http://localhost:8080/authenticate',{username,password}).pipe(
-     map(
-       userData => {
-        sessionStorage.setItem('username',username);
-        let tokenStr= 'Bearer '+userData.token;
-        sessionStorage.setItem('token', tokenStr);
-        return userData;
-       }
-     )
-
+    return this.httpClient.post<any>('http://localhost:8080/authenticate', { username, password }).pipe(
+      map(
+        userData => {
+          sessionStorage.setItem('username', username);
+          const tokenStr = 'Bearer ' + userData.token;
+          sessionStorage.setItem('token', tokenStr);
+          return userData;
+        }
+      )
     );
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('username')
-    console.log(!(user === null))
-    return !(user === null)
+    const user = sessionStorage.getItem('username');
+    console.log(!(user === null));
+    return !(user === null);
   }
 
   logOut() {
-    sessionStorage.removeItem('username')
+    sessionStorage.removeItem('username');
   }
 }
