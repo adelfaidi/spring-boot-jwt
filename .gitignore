@@ -1,5 +1,5 @@
 HELP.md
-target/
+backend/target/
 !.mvn/wrapper/maven-wrapper.jar
 #!**/src/main/**
 #!**/src/test/**
@@ -20,12 +20,12 @@ target/
 *.ipr
 
 ### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
+backend/nbproject/private/
+backend/nbbuild/
+backend/dist/
+backend/nbdist/
+backend/.nb-gradle/
+backend/build/
 
 ### VS Code ###
 .vscode/
@@ -33,47 +33,47 @@ build/
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-ngapp/dist
-ngapp/dist-server
-ngapp/tmp
-ngapp/out-tsc
+frontend/dist
+frontend/dist-server
+frontend/tmp
+frontend/out-tsc
 
 # dependencies
-ngapp/node_modules
+frontend/node_modules
 
 # IDEs and editors
-ngapp/.idea
-ngapp/brigde-loan-ui-metronic-skeleton.iml
-ngapp/bridge-loan-ui.iml
-ngapp/.project
-ngapp/.classpath
-ngapp/.c9/
-ngapp/*.launch
-ngapp/.settings/
-ngapp/*.sublime-workspace
+frontend/.idea
+frontend/brigde-loan-ui-metronic-skeleton.iml
+frontend/bridge-loan-ui.iml
+frontend/.project
+frontend/.classpath
+frontend/.c9/
+frontend/*.launch
+frontend/.settings/
+frontend/*.sublime-workspace
 
 # IDE - VSCode
-ngapp/!.vscode/settings.json
-ngapp/!.vscode/tasks.json
-ngapp/!.vscode/launch.json
-ngapp/!.vscode/extensions.json
+frontend/!.vscode/settings.json
+frontend/!.vscode/tasks.json
+frontend/!.vscode/launch.json
+frontend/!.vscode/extensions.json
 
 # misc
-ngapp/.sass-cache
-ngapp/connect.lock
-ngapp/coverage
-ngapp/libpeerconnection.log
-ngapp/npm-debug.log
-ngapp/testem.log
-ngapp/typings
+frontend/.sass-cache
+frontend/connect.lock
+frontend/coverage
+frontend/libpeerconnection.log
+frontend/npm-debug.log
+frontend/testem.log
+frontend/typings
 
 # e2e
-ngapp/e2e/*.js
-ngapp/e2e/*.map
+frontend/e2e/*.js
+frontend/e2e/*.map
 
 # System Files
-ngapp/.DS_Store
-ngapp/Thumbs.db
-ngapp/package-lock.json
+frontend/.DS_Store
+frontend/Thumbs.db
+frontend/package-lock.json
 
-ngapp/yarn-error.log
+frontend/yarn-error.log
