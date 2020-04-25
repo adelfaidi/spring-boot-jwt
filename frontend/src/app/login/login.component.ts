@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../service/authentication.service';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { AuthService } from '../auth/auth.service';
+import { AuthLoginInfo } from '../auth/login-info';
 
 @Component({
   selector: 'app-login',
@@ -9,28 +10,48 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  username = '';
-  password = '';
-  invalidLogin = false;
+  form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
+  private loginInfo: AuthLoginInfo;
 
-  constructor(private router: Router, private loginservice: AuthenticationService) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getAuthorities();
+    }
   }
 
-  checkLogin() {
-    (this.loginservice.authenticate(this.username, this.password).subscribe(
+  onSubmit() {
+    console.log(this.form);
+    this.loginInfo = new AuthLoginInfo(
+      this.form.username,
+      this.form.password);
+
+    this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
-        this.router.navigate(['']);
-        this.invalidLogin = false;
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUsername(data.username);
+        this.tokenStorage.saveAuthorities(data.authorities);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getAuthorities();
+        this.reloadPage();
       },
       error => {
-        this.invalidLogin = true;
-
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.isLoginFailed = true;
       }
-    )
     );
+  }
 
+  reloadPage() {
+    window.location.reload();
   }
 
 }

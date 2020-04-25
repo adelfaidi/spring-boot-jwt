@@ -1,16 +1,42 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmployeeComponent } from './employee/employee.component';
-import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
-import { AuthGaurdService } from './service/auth-gaurd.service';
+import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
+import { PmComponent } from './pm/pm.component';
+import { AdminComponent } from './admin/admin.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: '', component: EmployeeComponent,canActivate:[AuthGaurdService] },
-  { path: 'addemployee', component: AddEmployeeComponent,canActivate:[AuthGaurdService]},
-  { path: 'login', component: LoginComponent },
-  { path: 'logout', component: LogoutComponent,canActivate:[AuthGaurdService] },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'user',
+    component: UserComponent
+  },
+  {
+    path: 'pm',
+    component: PmComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent
+  },
+  {
+    path: 'auth/login',
+    component: LoginComponent
+  },
+  {
+    path: 'signup',
+    component: RegisterComponent
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

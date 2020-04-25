@@ -28,7 +28,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/authenticate")
+@RequestMapping("/api/authenticate")
 public class JwtAuthenticationController {
 
 	@Autowired
