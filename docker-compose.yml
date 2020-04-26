@@ -1,0 +1,49 @@
+version: '3'
+services:
+  database:
+    image: mariadb
+    container_name: database
+    environment:
+      MYSQL_DATABASE: 'testdb'
+      MYSQL_PASSWORD: '#adminadmin1'
+      MYSQL_ROOT_PASSWORD: '#adminadmin1'
+    ports:
+      - '3306:3306'
+    volumes:
+      - dockerAngularSpringDatabaseData:/var/lib/mysql
+    networks:
+      - backendNetwork
+
+  backend:
+    image: openjdk:8-jdk-alpine
+    container_name: backend
+    ports: 
+      - "8080:8080"
+    depends_on:
+      - database
+    volumes:
+      - ./backend/target/spring-boot-jwt-0.0.1-SNAPSHOT.jar:/application.jar
+    command: ["java","-jar","/application.jar"]
+    networks:
+      - backendNetwork
+      - frontendNetwork
+
+  frontend:
+    image: nginx:alpine
+    container_name: frontend
+    ports: 
+      - "4200:80"
+    depends_on: 
+      - backend
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend/dist/user-management:/usr/share/nginx/html
+    networks:
+      - frontendNetwork
+
+volumes:
+  dockerAngularSpringDatabaseData:
+
+networks:
+  backendNetwork:
+  frontendNetwork:
